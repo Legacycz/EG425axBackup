@@ -37,7 +37,7 @@ public class MazeSpawner : MonoBehaviour
 
         if (!FullRandom)
         {
-            Random.InitState(RandomSeed);
+            Random.InitState(RandomSeed)    ;
         }
         switch (Algorithm)
         {
