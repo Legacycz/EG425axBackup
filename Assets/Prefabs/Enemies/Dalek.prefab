@@ -197,7 +197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 195129041689271262}
-  WayPoints: []
   destinationReachedTreshold: 3
   state: 0
 --- !u!195 &195129041689271262

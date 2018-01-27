@@ -6,6 +6,7 @@ using VRTK;
 public class VRPlayer : MonoBehaviour
 {
     private VRTK_HeadsetFade headsetFade;
+    private bool isDying = false;
 
     public void Start()
     {
@@ -20,17 +21,23 @@ public class VRPlayer : MonoBehaviour
     [ContextMenu("Die")]
     public void Die()
     {
-        headsetFade.Fade(Color.red, 2f);
-        StartCoroutine(DieSequence());
+        if (!isDying)
+        {
+            headsetFade.Fade(Color.red, 2f);
+            StartCoroutine(DieSequence());
+        }
     }
 
     private IEnumerator DieSequence()
     {
+        isDying = true;
         print("Explosion sprite on operator map.");
         yield return new WaitForSeconds(3);
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.position = MazeLevelManager.Instance.gameOverPoint.position;
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = Quaternion.identity;
         headsetFade.Fade(Color.clear, 2f);
+        yield return new WaitForSeconds(2);
+        isDying = false;
     }
 
     private void OnTriggerEnter(Collider col)

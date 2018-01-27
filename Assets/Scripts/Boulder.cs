@@ -86,4 +86,12 @@ public class Boulder : MonoBehaviour {
             transform.Rotate(Vector3.up * 180);
         }
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(enabled && other.GetComponent<VRPlayer>())
+        {
+            MazeLevelManager.Instance.vrPlayer.Die();
+        }
+    }
 }
