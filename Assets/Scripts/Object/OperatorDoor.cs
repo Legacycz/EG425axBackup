@@ -9,9 +9,11 @@ public class OperatorDoor : MonoBehaviour {
     public GameObject Doors;
     public Vector3 Direction = Vector3.up;
     public float Height = 10;
+    public SpriteRenderer doorIcon;
+    public Sprite openedSprite;
+
     private bool _opening;
-
-
+    
     [ContextMenu("Click")]
     void OnMouseDown()
     {
@@ -25,6 +27,7 @@ public class OperatorDoor : MonoBehaviour {
     IEnumerator OpenDoor()
     {
         _opening = true;
+        doorIcon.sprite = openedSprite;
         float direction = -1;
         if(!Open)
         {
@@ -42,6 +45,5 @@ public class OperatorDoor : MonoBehaviour {
         Doors.transform.position = endPosition;        
         Open = !Open;
         _opening = false;
-
     }
 }

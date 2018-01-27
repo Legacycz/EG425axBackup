@@ -5,17 +5,57 @@ using VRTK;
 
 public class VRPlayer : MonoBehaviour
 {
+    public GameObject billboardObject;
+    public GameObject iconObject;
+    public Color playerColor;
+
     private VRTK_HeadsetFade headsetFade;
     private bool isDying = false;
 
-    public void Start()
+    void Awake()
     {
-        MazeLevelManager.Instance.vrPlayer = this;
+        billboardObject.GetComponent<SpriteRenderer>().color = playerColor;
+        iconObject.GetComponent<SpriteRenderer>().color = playerColor;
     }
 
     protected virtual void OnEnable()
     {
+        StartCoroutine(DelayedOnEnable());
+    }
+
+    protected virtual void OnDisable()
+    {
+        billboardObject.SetActive(true);
+    }
+
+    private IEnumerator DelayedOnEnable()
+    {
+        yield return null;
+        EnablePlayer();
+    }
+
+    public void EnablePlayer()
+    {
+        billboardObject.SetActive(false);
         headsetFade = (headsetFade != null ? headsetFade : FindObjectOfType<VRTK_HeadsetFade>());
+        if (MazeLevelManager.Instance.vrPlayer)
+        {
+            MazeLevelManager.Instance.vrPlayer.DisablePlayer();
+        }
+        VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.position = transform.position;
+        VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = transform.rotation;
+        transform.SetParent(VRTK_SDKManager.instance.loadedSetup.actualHeadset.transform);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        MazeLevelManager.Instance.vrPlayer = this;
+
+    }
+
+    public void DisablePlayer()
+    {
+        transform.SetParent(null);
+        enabled = false;
+        print("TODO: reset rotations");
     }
 
     [ContextMenu("Die")]
@@ -44,7 +84,6 @@ public class VRPlayer : MonoBehaviour
     {
         if (col.tag == "Block")
         {
-            print("Fade initialized");
             MazeLevelManager.Instance.activeBlock = col.gameObject.GetComponent<MazeBlock>();
             MazeLevelManager.Instance.activeBlock.RevealBlock();
         }

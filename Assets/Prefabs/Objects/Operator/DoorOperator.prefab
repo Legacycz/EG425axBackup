@@ -184,6 +184,8 @@ MonoBehaviour:
   Doors: {fileID: 1149926363454814}
   Direction: {x: 0, y: 1, z: 0}
   Height: 3.8
+  doorIcon: {fileID: 212574388123251714}
+  openedSprite: {fileID: 21300018, guid: e66a98ef442f460408ba9a782b7a83e3, type: 3}
 --- !u!212 &212574388123251714
 SpriteRenderer:
   m_ObjectHideFlags: 1
