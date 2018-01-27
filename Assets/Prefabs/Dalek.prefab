@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 195129041689271262}
   - component: {fileID: 114100620799711402}
   m_Layer: 0
-  m_Name: DalekBody
+  m_Name: Dalek
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,6 +199,7 @@ MonoBehaviour:
   agent: {fileID: 195129041689271262}
   WayPoints: []
   destinationReachedTreshold: 3
+  state: 0
 --- !u!195 &195129041689271262
 NavMeshAgent:
   m_ObjectHideFlags: 1
