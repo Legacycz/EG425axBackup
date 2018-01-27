@@ -86,7 +86,7 @@ public class VRPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "Block")
+        if (col.tag == "Block" && enabled)
         {
             MazeLevelManager.Instance.activeBlock = col.gameObject.GetComponent<MazeBlock>();
             MazeLevelManager.Instance.activeBlock.RevealBlock();
