@@ -5,8 +5,17 @@ using UnityEngine;
 public class PlayerIcon : MonoBehaviour {
     public VRPlayer playerParent;
 
+    private void Start()
+    {
+        if(!playerParent.enabled)
+        {
+            transform.SetParent(null);
+        }
+    }
+
     void OnMouseDown()
     {
+        print("click player");
         playerParent.EnablePlayer();
     }
 }
