@@ -22,7 +22,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165842}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4474760815858348}
@@ -139,6 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4645829258003764}
   - component: {fileID: 212999370774548412}
+  - component: {fileID: 65355701306316844}
   m_Layer: 5
   m_Name: BlockFogIcon
   m_TagString: Untagged
@@ -462,6 +463,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 4.000001, z: 0}
   m_Center: {x: 2, y: 2.0000005, z: 0}
+--- !u!65 &65355701306316844
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1724450276276528}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.78, y: 0.8100002, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65495993414992650
 BoxCollider:
   m_ObjectHideFlags: 1
