@@ -209,15 +209,37 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1405623329709518}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc80408c73b712e4fb5fe835b032458b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Desctription: Boulder
+  Buttons:
+  - Label: Activate
+    Active: 1
+    Color: {r: 0, g: 0.497, b: 0, a: 1}
+    Action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114533739727510152}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
   speed: 2
   spriteAnimators:
   - {fileID: 95981881282735616}
   - {fileID: 95049707852453648}
+  ActiveDescription: Running boulder, destroy everything.
 --- !u!114 &114995608152729964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,7 +251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 060958fb2ca99884b950d14d4da539bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookTarget: {fileID: 0}
   offsetVector: {x: 1, y: 0, z: 0}
 --- !u!135 &135870950965865268
 SphereCollider:

@@ -2,19 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIcon : MonoBehaviour {
+public class PlayerIcon : UsableBase {
     public VRPlayer playerParent;
+    public string destcriptionEmpty= "Use it";
+    public string destcriptioFull = "Your freinds";
 
     private void Start()
     {
         if(!playerParent.enabled)
         {
             transform.SetParent(null);
+            SetReadyToActivate();
+
         }
+        else
+        {
+            Desctription = destcriptioFull;
+            Buttons[0].Active = false;
+        }
+       
     }
 
-    void OnMouseDown()
+    public void SetReadyToActivate()
     {
+        Buttons[0].Active = true;
+        Desctription = destcriptionEmpty;
+    }
+
+    public void Activete()
+    {
+       
         playerParent.EnablePlayer();
+        MazeLevelManager.Instance.Usable.Selected = null;
     }
 }

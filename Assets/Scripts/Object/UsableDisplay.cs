@@ -72,7 +72,7 @@ public class UsableDisplay : MonoBehaviour {
             gameObject.SetActive(true);
             MainLabel.text = _selected.Desctription;
 
-            for(int i = 0; i < Mathf.Min(4, _selected.Buttons.Length);i++)
+            for(int i = 0; i < 4;i++)
             {
                 if(i < _selected.Buttons.Length)
                 {
@@ -90,6 +90,10 @@ public class UsableDisplay : MonoBehaviour {
                     Buttons[i].gameObject.SetActive(false);
                 }
             }
+        }
+        else
+        {
+            gameObject.SetActive(false);
         }
     }
 

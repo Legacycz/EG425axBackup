@@ -47,7 +47,7 @@ public class VRPlayer : MonoBehaviour
         transform.SetParent(VRTK_SDKManager.instance.loadedSetup.actualHeadset.transform);
         iconObject.transform.SetParent(transform);
         iconObject.transform.localPosition = Vector3.zero;
-        iconObject.transform.localEulerAngles = new Vector3(90, 90, 0);
+        iconObject.transform.localEulerAngles = new Vector3(90, 90, 0);        
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
         MazeLevelManager.Instance.vrPlayer = this;
@@ -60,6 +60,11 @@ public class VRPlayer : MonoBehaviour
         iconObject.transform.SetParent(null);
         iconObject.transform.localEulerAngles = new Vector3(90, 90, 0);
         enabled = false;
+        PlayerIcon scr = iconObject.GetComponent<PlayerIcon>();
+        if (scr)
+        {
+            scr.SetReadyToActivate();
+        }
     }
 
     [ContextMenu("Die")]

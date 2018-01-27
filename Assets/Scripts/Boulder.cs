@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boulder : MonoBehaviour {
+public class Boulder : UsableBase {
     public float speed = 2f;
     public List<Animator> spriteAnimators = new List<Animator>();
-
+    public string ActiveDescription = "Running boulder, destroy everything.";
     private bool isActivated = false;
 
     // Update is called once per frame
@@ -26,9 +26,12 @@ public class Boulder : MonoBehaviour {
         }
 	}
 
-    void OnMouseDown()
+    public void Activate()
     {
         isActivated = true;
+        Buttons[0].Active = false;
+        Desctription = ActiveDescription;
+        MazeLevelManager.Instance.Usable.UpdateView();
         for (int i = 0; i < spriteAnimators.Count; ++i)
         {
             spriteAnimators[i].enabled = true;

@@ -104,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1706520063183628}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16, y: 0, z: 0}
+  m_LocalPosition: {x: 16, y: 2, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4925103864474450}
@@ -259,7 +259,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430082c4ec1f44e47bff692967976b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Desctription: 
+  Buttons:
+  - Label: Activate
+    Active: 1
+    Color: {r: 0.03827853, g: 0.86764705, b: 0.24991037, a: 1}
+    Action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114210369089343314}
+          m_MethodName: Activete
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
   playerParent: {fileID: 114608790161127410}
+  destcriptionEmpty: Use it
+  destcriptioFull: Your freinds
 --- !u!114 &114608790161127410
 MonoBehaviour:
   m_ObjectHideFlags: 1

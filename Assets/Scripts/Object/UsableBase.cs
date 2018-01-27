@@ -22,6 +22,15 @@ public class UsableBase : MonoBehaviour {
 
     public ButtonInfo[] Buttons;
 
+    private Transform _parent;
+
+    void OnEnable()
+    {
+        _parent = transform.parent;
+    }
+
+    
+
     public virtual void OnMouseDown()
     {
        if( MazeLevelManager.Instance.Usable.Selected != this)
