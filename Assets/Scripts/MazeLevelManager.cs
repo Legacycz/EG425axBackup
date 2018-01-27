@@ -31,4 +31,17 @@ public class MazeLevelManager : MonoBehaviour {
             vrPlayer.transform.localRotation = Quaternion.identity;
         }
     }
+
+    [ContextMenu("RevealMap")]
+    public void RevealMap()
+    {
+        if (Application.isPlaying)
+        {
+            MazeBlock[] tiles = FindObjectsOfType<MazeBlock>();
+            for (int i = 0; i < tiles.Length; ++i)
+            {
+                tiles[i].RevealBlock();
+            }
+        }
+    }
 }
