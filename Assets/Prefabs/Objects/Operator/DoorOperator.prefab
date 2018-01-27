@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4309050640162114}
   - component: {fileID: 114512825528728706}
   - component: {fileID: 65703809273090714}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DoorOperator
   m_TagString: Untagged
   m_Icon: {fileID: 0}

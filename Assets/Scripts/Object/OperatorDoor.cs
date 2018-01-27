@@ -10,12 +10,12 @@ public class OperatorDoor : MonoBehaviour {
     public Vector3 Direction = Vector3.up;
     public float Height = 10;
     private bool _opening;
-    private float _openedHight = 0;
 
 
     [ContextMenu("Click")]
     void OnMouseDown()
     {
+        print("door opened");
         if(!_opening)
         {
             StartCoroutine(OpenDoor());
@@ -25,17 +25,12 @@ public class OperatorDoor : MonoBehaviour {
     IEnumerator OpenDoor()
     {
         _opening = true;
-        float start = Height;
-        float end = 0;
         float direction = -1;
         if(!Open)
         {
-             start = 0;
-             end = Height;
             direction = 1;
         }
         float time = Time.time;
-        float timeEnd = time + TimeToOpen;
         Vector3 startPosition = Doors.transform.position;
         Vector3 endPosition = startPosition + direction * Direction * Height;
         while(Time.time - time <= TimeToOpen)

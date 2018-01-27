@@ -10,6 +10,7 @@ TagManager:
   - ExcludeTeleport
   - Coin
   - Floor
+  - Block
   layers:
   - Default
   - TransparentFX

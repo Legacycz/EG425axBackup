@@ -5,7 +5,6 @@ using VRTK;
 
 public class VRPlayer : MonoBehaviour
 {
-    private bool isInitialized = false;
     private VRTK_HeadsetFade headsetFade;
 
     public void Start()
@@ -33,18 +32,14 @@ public class VRPlayer : MonoBehaviour
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = Quaternion.identity;
         headsetFade.Fade(Color.clear, 2f);
     }
-    
+
     private void OnTriggerEnter(Collider col)
     {
-        if (!isInitialized)
+        if (col.tag == "Block")
         {
-            if (col.gameObject.layer == LayerMask.NameToLayer("VisibleArea"))
-            {
-                print("Fade initialized");
-                isInitialized = true;
-                MazeLevelManager.Instance.activeBlock = col.gameObject.GetComponent<MazeBlock>();
-                MazeLevelManager.Instance.activeBlock.RevealBlock();
-            }
+            print("Fade initialized");
+            MazeLevelManager.Instance.activeBlock = col.gameObject.GetComponent<MazeBlock>();
+            MazeLevelManager.Instance.activeBlock.RevealBlock();
         }
     }
 }

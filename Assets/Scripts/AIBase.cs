@@ -13,7 +13,6 @@ public enum AIState
 public class AIBase : MonoBehaviour {
 
     public NavMeshAgent agent;
-    public GameObject[] WayPoints;
     int lastIndexCheckPoint = 0;
     public float destinationReachedTreshold = 3;
 
@@ -23,7 +22,7 @@ public class AIBase : MonoBehaviour {
 
     void Start()
     {
-        agent.SetDestination(WayPoints[0].gameObject.transform.position);
+        agent.SetDestination(AIManager.Instance.WayPoints[Random.Range(0, AIManager.Instance.WayPoints.Length)].gameObject.transform.position);
         state =AIState.Patrol;
     }
 	// Update is called once per frame
@@ -50,11 +49,11 @@ public class AIBase : MonoBehaviour {
         if(CheckDestinationReached(destinationReachedTreshold))
         {
             lastIndexCheckPoint++;
-            if (lastIndexCheckPoint >= WayPoints.Length)
+            if (lastIndexCheckPoint >= AIManager.Instance.WayPoints.Length)
             {
                 lastIndexCheckPoint = 0;
             }
-            agent.SetDestination(WayPoints[lastIndexCheckPoint].gameObject.transform.position);
+            agent.SetDestination(AIManager.Instance.WayPoints[lastIndexCheckPoint].gameObject.transform.position);
             
         }
     }
@@ -143,23 +142,23 @@ public class AIBase : MonoBehaviour {
         {
             Gizmos.DrawLine(transform.position, _target.transform.position);
         }
-        if (WayPoints == null)
+        if (AIManager.Instance.WayPoints == null)
         {
             return;
         }
-        for (int i = 0; i < WayPoints.Length; i++)
+        for (int i = 0; i < AIManager.Instance.WayPoints.Length; i++)
         {
-            if (WayPoints[i] == null)
+            if (AIManager.Instance.WayPoints[i] == null)
                 continue;
             if (i == 0)
             {
-                Gizmos.DrawLine(transform.position, WayPoints[i].transform.position);
+                Gizmos.DrawLine(transform.position, AIManager.Instance.WayPoints[i].transform.position);
             }
             else
             {
-                if (WayPoints[i-1] == null)
+                if (AIManager.Instance.WayPoints[i-1] == null)
                     continue;
-                Gizmos.DrawLine(WayPoints[i - 1].transform.position, WayPoints[i].transform.position);
+                Gizmos.DrawLine(AIManager.Instance.WayPoints[i - 1].transform.position, AIManager.Instance.WayPoints[i].transform.position);
             }
         }
     }
