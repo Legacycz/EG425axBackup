@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,11 +25,15 @@ public class AIBase : MonoBehaviour {
     public AIState state;
     private Coroutine _lookingCorutine;
     private Coroutine _attackCorutine;
+
     public float ForceShoot = 10;
 
     void Start()
     {
-        agent.SetDestination(AIManager.Instance.WayPoints[Random.Range(0, AIManager.Instance.WayPoints.Length)].gameObject.transform.position);
+        if (!agent)
+            return;
+
+        agent.SetDestination(AIManager.Instance.WayPoints[UnityEngine.Random.Range(0, AIManager.Instance.WayPoints.Length)].gameObject.transform.position);
         state =AIState.Patrol;
     }
 
@@ -38,7 +43,11 @@ public class AIBase : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
+        if (!agent)
+            return;
+
         switch (state)
         {
             case AIState.Patrol:
@@ -72,9 +81,7 @@ public class AIBase : MonoBehaviour {
                 ChangeState(AIState.Chase);
             }
         }
-    }
-
-    
+    }    
 
     void PatrolUpdate()
     {
@@ -115,6 +122,10 @@ public class AIBase : MonoBehaviour {
 
     bool CheckDestinationReached(float ReachedTreshold)
     {
+        if (!agent)
+            return false;
+
+
         float distanceToTarget = Vector3.Distance(transform.position, agent.destination);
         
         if (distanceToTarget < ReachedTreshold)
@@ -260,5 +271,11 @@ public class AIBase : MonoBehaviour {
                 Gizmos.DrawLine(AIManager.Instance.WayPoints[i - 1].transform.position, AIManager.Instance.WayPoints[i].transform.position);
             }
         }
+    }
+
+    public void Die()
+    {
+        Debug.Log("TODO: Some explosion effect for enemy kill.");
+        Destroy(gameObject);
     }
 }

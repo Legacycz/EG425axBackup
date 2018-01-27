@@ -12,6 +12,9 @@ public class Billboard : MonoBehaviour
         if (MazeLevelManager.Instance.vrPlayer)
         {
             transform.eulerAngles = MazeLevelManager.Instance.vrPlayer.transform.eulerAngles + offsetVector * 180;
+            Vector3 tmp = transform.localEulerAngles;
+            tmp.z = 0;
+            transform.localEulerAngles = tmp;
         }
     }
 }

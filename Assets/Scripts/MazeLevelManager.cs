@@ -8,6 +8,8 @@ public class MazeLevelManager : MonoBehaviour {
 
     public MazeBlock activeBlock;
     public Transform gameOverPoint;
+    public GUIFadeScreen gameOverScreen;
+    public GUIFadeScreen winGameScreen;
 
     internal VRPlayer vrPlayer;
 
@@ -35,6 +37,11 @@ public class MazeLevelManager : MonoBehaviour {
             vrPlayer.transform.localPosition = Vector3.zero;
             vrPlayer.transform.localRotation = Quaternion.identity;
         }
+    }
+
+    public void WinGame()
+    {
+        vrPlayer.Win();
     }
 
     [ContextMenu("RevealMap")]

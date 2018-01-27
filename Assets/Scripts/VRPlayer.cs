@@ -10,7 +10,7 @@ public class VRPlayer : MonoBehaviour
     public Color playerColor;
 
     private VRTK_HeadsetFade headsetFade;
-    private bool isDying = false;
+    private bool isDeathBlocked = false;
 
     void Awake()
     {
@@ -67,10 +67,32 @@ public class VRPlayer : MonoBehaviour
         }
     }
 
+    [ContextMenu("Win")]
+    public void Win()
+    {
+        if(!isDeathBlocked)
+        {
+            headsetFade.Fade(Color.green, 2f);
+            StartCoroutine(WinSequence());
+        }
+    }
+
+    private IEnumerator WinSequence()
+    {
+        isDeathBlocked = true;
+        MazeLevelManager.Instance.winGameScreen.StartScreenFade();
+        yield return new WaitForSeconds(3);
+        VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.position = MazeLevelManager.Instance.gameOverPoint.position;
+        VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = Quaternion.identity;
+        //headsetFade.Fade(Color.clear, 2f);
+        //yield return new WaitForSeconds(2);
+        //isDeathBlocked = false;
+    }
+
     [ContextMenu("Die")]
     public void Die()
     {
-        if (!isDying)
+        if (!isDeathBlocked)
         {
             headsetFade.Fade(Color.red, 2f);
             StartCoroutine(DieSequence());
@@ -79,14 +101,14 @@ public class VRPlayer : MonoBehaviour
 
     private IEnumerator DieSequence()
     {
-        isDying = true;
-        print("Death explosion sprite on operator map.");
+        isDeathBlocked = true;
+        MazeLevelManager.Instance.gameOverScreen.StartScreenFade();
         yield return new WaitForSeconds(3);
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.position = MazeLevelManager.Instance.gameOverPoint.position;
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = Quaternion.identity;
         headsetFade.Fade(Color.clear, 2f);
         yield return new WaitForSeconds(2);
-        isDying = false;
+        isDeathBlocked = false;
     }
 
     private void OnTriggerEnter(Collider col)
