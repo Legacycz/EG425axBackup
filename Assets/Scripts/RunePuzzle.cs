@@ -2,14 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class RunePuzzle : MonoBehaviour {
+public class RunePuzzle : MonoBehaviour
+{
+    public UnityEvent OnResolved;
+
     public List<RuneButton> runes = new List<RuneButton>();
     public int solutionSize;
     public List<RuneButton> solution = new List<RuneButton>();
     public List<bool> solutionAnswers = new List<bool>();
 
     private int currentAnswerIndex = 0;
+    private bool isSolved = false;
 
     private void Start()
     {
@@ -27,13 +32,18 @@ public class RunePuzzle : MonoBehaviour {
 
     internal void CheckAnswer(RuneButton pressedRuneButton)
     {
+        if(isSolved)
+        {
+            return;
+        }
+
         if (pressedRuneButton == runes[currentAnswerIndex])
         {
             solutionAnswers[currentAnswerIndex] = true;
             ++currentAnswerIndex;
             if(currentAnswerIndex >= solutionSize)
             {
-                ResolveSolution();
+                ResolvePuzzle();
             }
         }
         else
@@ -47,8 +57,10 @@ public class RunePuzzle : MonoBehaviour {
         }
     }
 
-    public void ResolveSolution()
+    public void ResolvePuzzle()
     {
-        print("good job");
+        OnResolved.Invoke();
+        print("solved");
+        isSolved = true;
     }
 }

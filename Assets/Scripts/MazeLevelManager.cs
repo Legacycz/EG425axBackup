@@ -5,17 +5,20 @@ using VRTK;
 
 public class MazeLevelManager : MonoBehaviour {
     public static MazeLevelManager Instance { get; private set; }
-    
+
     public MazeBlock activeBlock;
     public Transform gameOverPoint;
 
     internal VRPlayer vrPlayer;
+
+    public Sprite[] abilityIconsAtlas;
 
     public UsableDisplay Usable;
 
     private void Awake()
     {
         Instance = this;
+        abilityIconsAtlas = Resources.LoadAll<Sprite>("Symbols");
     }
 
     // Use this for initialization
