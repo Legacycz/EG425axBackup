@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b4926c41a3936f646889cd50c25a7a3e
-timeCreated: 1517022590
+guid: 80c0fc8ddc56650418b33f2ce1d41822
+timeCreated: 1517023575
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -9,6 +9,7 @@ TextureImporter:
     21300004: explosion_2
     21300006: explosion_3
     21300008: explosion_4
+    21300010: explosion_5
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -89,9 +90,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1149
-        width: 951
-        height: 765
+        y: 1686
+        width: 1002
+        height: 770
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -103,9 +104,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1549
-        y: 1149
+        y: 1689
         width: 1238
-        height: 1037
+        height: 1043
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -116,10 +117,10 @@ TextureImporter:
       name: explosion_2
       rect:
         serializedVersion: 2
-        x: 3183
-        y: 1036
-        width: 1511
-        height: 1393
+        x: 3184
+        y: 1576
+        width: 1515
+        height: 1391
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,10 +131,10 @@ TextureImporter:
       name: explosion_3
       rect:
         serializedVersion: 2
-        x: 5291
-        y: 1315
-        width: 1118
-        height: 1033
+        x: 3401
+        y: 0
+        width: 1316
+        height: 1154
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,10 +145,24 @@ TextureImporter:
       name: explosion_4
       rect:
         serializedVersion: 2
-        x: 5574
-        y: 0
-        width: 955
-        height: 596
+        x: 5289
+        y: 1855
+        width: 1119
+        height: 1031
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: explosion_5
+      rect:
+        serializedVersion: 2
+        x: 5572
+        y: 537
+        width: 957
+        height: 598
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
