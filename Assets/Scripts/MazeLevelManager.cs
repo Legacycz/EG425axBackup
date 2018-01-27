@@ -24,7 +24,7 @@ public class MazeLevelManager : MonoBehaviour {
 
     private void Instance_LoadedSetupChanged(VRTK_SDKManager sender, VRTK_SDKManager.LoadedSetupChangeEventArgs e)
     {
-        if (e.currentSetup)
+        if (e.currentSetup && vrPlayer)
         {
             vrPlayer.transform.SetParent(e.currentSetup.actualHeadset.transform);
             vrPlayer.transform.localPosition = Vector3.zero;
