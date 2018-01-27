@@ -1404,7 +1404,8 @@ namespace VRTK
             if (usingObject != null && usingObject.interactTouch != null && (usingObject.gameObject.activeInHierarchy || forceDisabled))
             {
                 usingObject.interactTouch.ForceStopTouching();
-                usingObject.ForceStopUsing();
+                if(usingObject)
+                    usingObject.ForceStopUsing();
             }
         }
 
