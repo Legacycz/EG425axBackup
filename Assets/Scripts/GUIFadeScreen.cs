@@ -5,13 +5,13 @@ using UnityEngine;
 public class GUIFadeScreen : MonoBehaviour {
     public CanvasGroup thisCanvasGroup;
 
-    public void StartScreenFade()
+    public void StartUIScreenFadeIn()
     {
         gameObject.SetActive(true);
-        StartCoroutine(ScreenFadeSequence());
+        StartCoroutine(ScreenUIFadeInSequence());
     }
 
-    private IEnumerator ScreenFadeSequence()
+    private IEnumerator ScreenUIFadeInSequence()
     {
         float elapsedTime = 0;
         thisCanvasGroup.alpha = 0;
@@ -22,5 +22,24 @@ public class GUIFadeScreen : MonoBehaviour {
             elapsedTime += Time.deltaTime / 3;
             yield return null;
         }
+    }
+
+    public void StartUIScreenFadeOut()
+    {
+        StartCoroutine(ScreenUIFadeOutSequence());
+    }
+
+    private IEnumerator ScreenUIFadeOutSequence()
+    {
+        float elapsedTime = 0;
+        thisCanvasGroup.alpha = 1;
+
+        while (elapsedTime < 1)
+        {
+            thisCanvasGroup.alpha = Mathf.Lerp(1, 0, elapsedTime);
+            elapsedTime += Time.deltaTime / 3;
+            yield return null;
+        }
+        gameObject.SetActive(false);
     }
 }

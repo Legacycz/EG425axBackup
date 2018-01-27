@@ -80,7 +80,7 @@ public class VRPlayer : MonoBehaviour
     private IEnumerator WinSequence()
     {
         isDeathBlocked = true;
-        MazeLevelManager.Instance.winGameScreen.StartScreenFade();
+        MazeLevelManager.Instance.winGameScreen.StartUIScreenFadeIn();
         yield return new WaitForSeconds(3);
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.position = MazeLevelManager.Instance.gameOverPoint.position;
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = Quaternion.identity;
@@ -102,7 +102,7 @@ public class VRPlayer : MonoBehaviour
     private IEnumerator DieSequence()
     {
         isDeathBlocked = true;
-        MazeLevelManager.Instance.gameOverScreen.StartScreenFade();
+        MazeLevelManager.Instance.gameOverScreen.StartUIScreenFadeIn();
         yield return new WaitForSeconds(3);
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.position = MazeLevelManager.Instance.gameOverPoint.position;
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = Quaternion.identity;
