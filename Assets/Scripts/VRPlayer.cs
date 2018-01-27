@@ -31,7 +31,7 @@ public class VRPlayer : MonoBehaviour
     private IEnumerator DieSequence()
     {
         isDying = true;
-        print("Explosion sprite on operator map.");
+        print("Death explosion sprite on operator map.");
         yield return new WaitForSeconds(3);
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.position = MazeLevelManager.Instance.gameOverPoint.position;
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = Quaternion.identity;

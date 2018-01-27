@@ -75,7 +75,7 @@ public class MazeBlock : MonoBehaviour
 
     public void RevealBlock()
     {
-        print("Reveal block");
+        //print("Reveal block");
         blockToReveal.SetActive(false);
 
         if (rightBlock)
