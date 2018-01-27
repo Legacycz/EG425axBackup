@@ -22,8 +22,8 @@ TagManager:
   - 
   - VisibleArea
   - Wall
-  - PlayerCollision
-  - Shot
+  - ClickableDefault
+  - 
   - 
   - 
   - 

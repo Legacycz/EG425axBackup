@@ -43,8 +43,11 @@ public class VRPlayer : MonoBehaviour
             MazeLevelManager.Instance.vrPlayer.DisablePlayer();
         }
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.position = transform.position;
-        VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = transform.rotation;
+        //VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = transform.rotation;
         transform.SetParent(VRTK_SDKManager.instance.loadedSetup.actualHeadset.transform);
+        iconObject.transform.SetParent(transform);
+        iconObject.transform.localPosition = Vector3.zero;
+        iconObject.transform.localEulerAngles = new Vector3(90, 90, 0);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
         MazeLevelManager.Instance.vrPlayer = this;
@@ -54,8 +57,9 @@ public class VRPlayer : MonoBehaviour
     public void DisablePlayer()
     {
         transform.SetParent(null);
+        iconObject.transform.SetParent(null);
+        iconObject.transform.localEulerAngles = new Vector3(90, 90, 0);
         enabled = false;
-        print("TODO: reset rotations");
     }
 
     [ContextMenu("Die")]
