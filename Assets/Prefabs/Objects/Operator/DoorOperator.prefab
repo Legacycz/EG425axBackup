@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33838419408371546}
   - component: {fileID: 65996516558647860}
   - component: {fileID: 23964450521233678}
+  - component: {fileID: 208655899099945750}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -53,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1494432214878078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.13, z: 2.06}
+  m_LocalPosition: {x: 7.955804, y: -0.14, z: 2.161704}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4967569235285788}
@@ -154,3 +155,18 @@ MonoBehaviour:
   Doors: {fileID: 1149926363454814}
   Direction: {x: 0, y: 1, z: 0}
   Height: 3.8
+--- !u!208 &208655899099945750
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1149926363454814}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
