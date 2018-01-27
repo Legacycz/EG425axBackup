@@ -17,6 +17,7 @@ public class InteractiveObject : MonoBehaviour {
         ObjectUsed();
     }
 
+    [ContextMenu("ForceObjectUsed")]
     public virtual void ObjectUsed()
     {
         print("Object used.");
