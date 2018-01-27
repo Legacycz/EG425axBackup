@@ -9,10 +9,10 @@ public class MazeBlock : MonoBehaviour
     {
         if (MazeLevelManager.Instance.activeBlock == this)
         {
-            if (col.gameObject.GetComponent<PlayerVisibility>())
+            if (col.gameObject.GetComponent<VRPlayer>())
             {
                 print("Fade in");
-                VRTK_ScreenFade.Start(Color.clear, 1f);
+                //VRTK_ScreenFade.Start(Color.clear, 1f);
             }
         }
     }
@@ -21,10 +21,10 @@ public class MazeBlock : MonoBehaviour
     {
         if (MazeLevelManager.Instance.activeBlock == this)
         {
-            if (col.gameObject.GetComponent<PlayerVisibility>())
+            if (col.gameObject.GetComponent<VRPlayer>())
             {
                 print("Fade out");
-                VRTK_ScreenFade.Start(Color.black, 1f);
+                //VRTK_ScreenFade.Start(Color.black, 1f);
             }
         }
     }

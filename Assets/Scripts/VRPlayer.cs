@@ -2,11 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerVisibility : MonoBehaviour
+public class VRPlayer : MonoBehaviour
 {
     private bool isInitialized = false;
 
-    // Use this for initialization
+    public void Start()
+    {
+        MazeLevelManager.Instance.vrPlayer = this;
+    }
+
+
+
+
+
+
+
     private void OnTriggerEnter(Collider col)
     {
         if (!isInitialized)

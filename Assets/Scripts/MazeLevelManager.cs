@@ -6,6 +6,7 @@ using VRTK;
 public class MazeLevelManager : MonoBehaviour {
     public static MazeLevelManager Instance { get; private set; }
 
+    public VRPlayer vrPlayer;
     public GameObject playerVisualization;
     public MazeBlock activeBlock;
 
