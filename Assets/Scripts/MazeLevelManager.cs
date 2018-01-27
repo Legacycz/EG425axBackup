@@ -5,10 +5,11 @@ using VRTK;
 
 public class MazeLevelManager : MonoBehaviour {
     public static MazeLevelManager Instance { get; private set; }
-
-    public VRPlayer vrPlayer;
-    public GameObject playerVisualization;
+    
     public MazeBlock activeBlock;
+    public Transform gameOverPoint;
+
+    internal VRPlayer vrPlayer;
 
     private void Awake()
     {
@@ -25,9 +26,9 @@ public class MazeLevelManager : MonoBehaviour {
     {
         if (e.currentSetup)
         {
-            playerVisualization.transform.SetParent(e.currentSetup.actualHeadset.transform);
-            playerVisualization.transform.localPosition = Vector3.zero;
-            playerVisualization.transform.localRotation = Quaternion.identity;
+            vrPlayer.transform.SetParent(e.currentSetup.actualHeadset.transform);
+            vrPlayer.transform.localPosition = Vector3.zero;
+            vrPlayer.transform.localRotation = Quaternion.identity;
         }
     }
 }
