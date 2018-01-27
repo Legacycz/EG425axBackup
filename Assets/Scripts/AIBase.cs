@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,19 +15,30 @@ public class AIBase : MonoBehaviour {
 
     public NavMeshAgent agent;
     int lastIndexCheckPoint = 0;
-    public float destinationReachedTreshold = 3;
+    public float Reload = 0.5f;
+    public float destinationReachedPatrolTreshold = 3;
+    public float destinationReachedChaseTreshold = 8;
+    public GameObject Shot;
 
     GameObject _target;
     public AIState state;
     private Coroutine _lookingCorutine;
+    private Coroutine _attackCorutine;
+    public float ForceShoot = 10;
 
     void Start()
     {
         agent.SetDestination(AIManager.Instance.WayPoints[Random.Range(0, AIManager.Instance.WayPoints.Length)].gameObject.transform.position);
         state =AIState.Patrol;
     }
-	// Update is called once per frame
-	void Update () {
+
+    internal void KillTarger()
+    {
+        _target = null;
+    }
+
+    // Update is called once per frame
+    void Update () {
         switch (state)
         {
             case AIState.Patrol:
@@ -38,30 +50,67 @@ public class AIBase : MonoBehaviour {
                 ChaseUpdate();
                 break;
             case AIState.Attack:
+                AttackUpdate();
                 break;
             default:
                 break;
         }
     }
 
+    private void AttackUpdate()
+    {
+        if(_attackCorutine == null)
+        {
+            _attackCorutine= StartCoroutine(AttackCorutine());
+        }
+        if(!IsLookingOnTarget())
+        {
+            if (_attackCorutine != null)
+            {
+                StopCoroutine(_attackCorutine);
+                _attackCorutine = null;
+                ChangeState(AIState.Chase);
+            }
+        }
+    }
+
+    
+
     void PatrolUpdate()
     {
-        if(CheckDestinationReached(destinationReachedTreshold))
+        if(AIManager.Instance.WayPoints == null)
+        {
+            return;
+        }
+        if (CheckDestinationReached(destinationReachedPatrolTreshold))
         {
             lastIndexCheckPoint++;
+
             if (lastIndexCheckPoint >= AIManager.Instance.WayPoints.Length)
             {
                 lastIndexCheckPoint = 0;
             }
-            agent.SetDestination(AIManager.Instance.WayPoints[lastIndexCheckPoint].gameObject.transform.position);
+            if(AIManager.Instance.WayPoints[lastIndexCheckPoint] != null)
+                agent.SetDestination(AIManager.Instance.WayPoints[lastIndexCheckPoint].gameObject.transform.position);
             
         }
     }
 
     void ChaseUpdate()
     {
+        if (_target)
+        {
+            agent.SetDestination(_target.transform.position);
+        }
+        else
+        {
+            ChangeState(AIState.Patrol);
+        }
 
-        agent.SetDestination(_target.transform.position);
+        if (CheckDestinationReached(destinationReachedChaseTreshold) && IsLookingOnTarget())
+        {
+            ChangeState(AIState.Attack);
+        }
     }
 
     bool CheckDestinationReached(float ReachedTreshold)
@@ -101,38 +150,88 @@ public class AIBase : MonoBehaviour {
 
     IEnumerator LookingForTarget()
     {
-        while(_target != null && state == AIState.Patrol)
+        while (_target != null && state == AIState.Patrol)
         {
             Debug.Log("Looking");
-            Ray ray = new Ray(transform.position, _target.transform.position - transform.position);
-            RaycastHit hit;
-            Debug.DrawLine(ray.origin, ray.origin + ray.direction);
-            Color color = Color.red;
-            if ( Physics.Raycast(ray,out hit))
+            if (IsLookingOnTarget())
             {
-                
-                if (hit.transform.gameObject == _target)
-                {
-                    Debug.DrawLine(ray.origin, ray.origin + ray.direction, Color.green);
-                    ChangeState(AIState.Chase);
-                }
-                else
-                {
-                    Debug.DrawLine(ray.origin, ray.origin + ray.direction, color);
-                    yield return new WaitForSeconds(0.2f);
-                }
+                ChangeState(AIState.Chase);
             }
             else
             {
-                Debug.DrawLine(ray.origin, ray.origin + ray.direction, color);
                 yield return new WaitForSeconds(0.2f);
+            }
+        } 
+    }
+
+    private IEnumerator AttackCorutine()
+    {
+        while(_target)
+        {
+            yield return new WaitForSeconds(Reload);
+            Vector3 direction = (_target.transform.position - transform.position).normalized;
+            GameObject shot = Instantiate(Shot, transform.position + direction * 2, Quaternion.LookRotation(direction));
+            Rigidbody shotRig = shot.GetComponent<Rigidbody>();
+            if(shotRig)
+            {
+                Shot compShot = shotRig.GetComponent<Shot>();
+                if(compShot)
+                {
+                    compShot.owner = this;
+                }
+                shotRig.AddForce(direction * ForceShoot, ForceMode.Impulse);
+            }
+            else
+            {
+                Destroy(shot);
             }
         }
     }
 
+    bool IsLookingOnTarget()
+    {
+        if(_target == null)
+        {
+            return false;
+        }
+        Ray ray = new Ray(transform.position, _target.transform.position - transform.position);
+        RaycastHit hit;
+        Color color = Color.red;
+        if (Physics.Raycast(ray, out hit))
+        {
+
+            if (hit.transform.gameObject == _target)
+            {
+                Debug.DrawLine(ray.origin, ray.origin + (ray.direction * 1000), Color.green);
+                return true;
+            }
+        }
+          
+        Debug.DrawLine(ray.origin, ray.origin + (ray.direction * 1000), Color.red);
+        return false;
+    }
+    
+
     void ChangeState(AIState newState)
     {
-
+        if(state == AIState.Chase)
+        {
+            if(newState == AIState.Attack)
+            {
+                agent.isStopped = true;
+            }
+        }
+        if (state == AIState.Attack)
+        {
+            if (newState != AIState.Attack)
+            {
+                agent.isStopped = false;
+            }
+        }
+        if (newState == AIState.Patrol)
+        {
+            agent.SetDestination(AIManager.Instance.WayPoints[lastIndexCheckPoint].gameObject.transform.position);
+        }
         state = newState; 
     }
 

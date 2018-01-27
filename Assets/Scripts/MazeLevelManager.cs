@@ -11,6 +11,8 @@ public class MazeLevelManager : MonoBehaviour {
 
     internal VRPlayer vrPlayer;
 
+    public UsableDisplay Usable;
+
     private void Awake()
     {
         Instance = this;

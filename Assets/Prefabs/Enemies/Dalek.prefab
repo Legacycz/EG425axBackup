@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 95735944207336016}
   - component: {fileID: 195129041689271262}
   - component: {fileID: 114100620799711402}
+  - component: {fileID: 135745990344744692}
   m_Layer: 0
   m_Name: Dalek
   m_TagString: Untagged
@@ -197,8 +198,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 195129041689271262}
-  destinationReachedTreshold: 3
+  Reload: 0.5
+  destinationReachedPatrolTreshold: 3
+  destinationReachedChaseTreshold: 5
+  Shot: {fileID: 1723581968600818, guid: 05d0b1e3f2db6664289bf2f9d92cb4ed, type: 2}
   state: 0
+  ForceShoot: 20
+--- !u!135 &135745990344744692
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1184272984026700}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 80
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &195129041689271262
 NavMeshAgent:
   m_ObjectHideFlags: 1
