@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-enum AIState
+public enum AIState
 {
  Patrol,
  Idle,
@@ -16,8 +16,11 @@ public class AIBase : MonoBehaviour {
     public GameObject[] WayPoints;
     int lastIndexCheckPoint = 0;
     public float destinationReachedTreshold = 3;
-    AIState state;
-    
+
+    GameObject _target;
+    public AIState state;
+    private Coroutine _lookingCorutine;
+
     void Start()
     {
         agent.SetDestination(WayPoints[0].gameObject.transform.position);
@@ -33,6 +36,7 @@ public class AIBase : MonoBehaviour {
             case AIState.Idle:
                 break;
             case AIState.Chase:
+                ChaseUpdate();
                 break;
             case AIState.Attack:
                 break;
@@ -43,7 +47,7 @@ public class AIBase : MonoBehaviour {
 
     void PatrolUpdate()
     {
-        if(CheckDestinationReached())
+        if(CheckDestinationReached(destinationReachedTreshold))
         {
             lastIndexCheckPoint++;
             if (lastIndexCheckPoint >= WayPoints.Length)
@@ -55,11 +59,17 @@ public class AIBase : MonoBehaviour {
         }
     }
 
-    bool CheckDestinationReached()
+    void ChaseUpdate()
+    {
+
+        agent.SetDestination(_target.transform.position);
+    }
+
+    bool CheckDestinationReached(float ReachedTreshold)
     {
         float distanceToTarget = Vector3.Distance(transform.position, agent.destination);
         
-        if (distanceToTarget < destinationReachedTreshold)
+        if (distanceToTarget < ReachedTreshold)
         {
             print("Destination reached");
             return true;
@@ -67,8 +77,72 @@ public class AIBase : MonoBehaviour {
         return false;
     }
 
+    void OnTriggerEnter(Collider coll)
+    {
+        Debug.Log("Coll with" + coll.name);
+        if( coll.tag == "Player")
+        {
+            _target = coll.gameObject;
+            _lookingCorutine = StartCoroutine(LookingForTarget());
+        }
+    }
+
+    void OnTriggerExit(Collider coll)
+    {
+        if (_target == coll.gameObject && state == AIState.Patrol)
+        {
+            _target = null;
+            if(_lookingCorutine != null)
+            {
+                StopCoroutine(_lookingCorutine);
+                _lookingCorutine = null;
+            }
+        }
+    }
+
+    IEnumerator LookingForTarget()
+    {
+        while(_target != null && state == AIState.Patrol)
+        {
+            Debug.Log("Looking");
+            Ray ray = new Ray(transform.position, _target.transform.position - transform.position);
+            RaycastHit hit;
+            Debug.DrawLine(ray.origin, ray.origin + ray.direction);
+            Color color = Color.red;
+            if ( Physics.Raycast(ray,out hit))
+            {
+                
+                if (hit.transform.gameObject == _target)
+                {
+                    Debug.DrawLine(ray.origin, ray.origin + ray.direction, Color.green);
+                    ChangeState(AIState.Chase);
+                }
+                else
+                {
+                    Debug.DrawLine(ray.origin, ray.origin + ray.direction, color);
+                    yield return new WaitForSeconds(0.2f);
+                }
+            }
+            else
+            {
+                Debug.DrawLine(ray.origin, ray.origin + ray.direction, color);
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+    }
+
+    void ChangeState(AIState newState)
+    {
+
+        state = newState; 
+    }
+
     void OnDrawGizmosSelected()
     {
+        if(_target != null && _lookingCorutine == null)
+        {
+            Gizmos.DrawLine(transform.position, _target.transform.position);
+        }
         if (WayPoints == null)
         {
             return;

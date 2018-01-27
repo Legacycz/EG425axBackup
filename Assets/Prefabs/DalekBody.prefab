@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 212902374471423318}
   - component: {fileID: 95735944207336016}
   - component: {fileID: 195129041689271262}
+  - component: {fileID: 114100620799711402}
   m_Layer: 0
   m_Name: DalekBody
   m_TagString: Untagged
@@ -184,6 +185,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114100620799711402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1184272984026700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2266dc75cf5615c4daf2f418e73df33b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 195129041689271262}
+  WayPoints: []
+  destinationReachedTreshold: 3
 --- !u!195 &195129041689271262
 NavMeshAgent:
   m_ObjectHideFlags: 1
