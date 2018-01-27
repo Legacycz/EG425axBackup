@@ -6,28 +6,34 @@ public class Boulder : MonoBehaviour {
     public float speed = 2f;
     public List<Animator> spriteAnimators = new List<Animator>();
 
-    private void OnEnable()
+    private bool isActivated = false;
+
+    // Update is called once per frame
+    void Update () {
+        if (isActivated)
+        {
+            transform.Translate(Vector3.forward * Time.deltaTime * speed);
+            Ray checkRay = new Ray(transform.position, transform.forward);
+            Debug.DrawRay(checkRay.origin, checkRay.direction * 1.525f, Color.red);
+            RaycastHit rayHit;
+            if (Physics.Raycast(checkRay, out rayHit, 1.525f))
+            {
+                if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Wall"))
+                {
+                    TurnBoulder();
+                }
+            }
+        }
+	}
+
+    void OnMouseDown()
     {
+        isActivated = true;
         for (int i = 0; i < spriteAnimators.Count; ++i)
         {
             spriteAnimators[i].enabled = true;
         }
     }
-
-    // Update is called once per frame
-    void Update () {
-        transform.Translate(Vector3.forward * Time.deltaTime * speed);
-        Ray checkRay = new Ray(transform.position, transform.forward);
-        Debug.DrawRay(checkRay.origin, checkRay.direction * 1.525f, Color.red);
-        RaycastHit rayHit;
-        if (Physics.Raycast(checkRay, out rayHit, 1.525f))
-        {
-            if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Wall"))
-            {
-                TurnBoulder();
-            }
-        }
-	}
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -89,7 +95,7 @@ public class Boulder : MonoBehaviour {
 
     public void OnTriggerEnter(Collider other)
     {
-        if(enabled && other.GetComponent<VRPlayer>())
+        if(enabled && isActivated && other.GetComponent<VRPlayer>())
         {
             MazeLevelManager.Instance.vrPlayer.Die();
         }

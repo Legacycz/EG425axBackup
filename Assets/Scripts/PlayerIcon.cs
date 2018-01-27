@@ -15,7 +15,6 @@ public class PlayerIcon : MonoBehaviour {
 
     void OnMouseDown()
     {
-        print("click player");
         playerParent.EnablePlayer();
     }
 }
