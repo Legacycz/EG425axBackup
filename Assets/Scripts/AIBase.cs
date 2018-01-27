@@ -190,6 +190,10 @@ public class AIBase : MonoBehaviour {
 
     bool IsLookingOnTarget()
     {
+        if(_target == null)
+        {
+            return false;
+        }
         Ray ray = new Ray(transform.position, _target.transform.position - transform.position);
         RaycastHit hit;
         Color color = Color.red;
