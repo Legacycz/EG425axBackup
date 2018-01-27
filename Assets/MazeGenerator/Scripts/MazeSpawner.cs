@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 //<summary>
 //Game object, that creates maze and instantiates it in scene
@@ -66,32 +67,43 @@ public class MazeSpawner : MonoBehaviour
                 float x = column * (CellWidth + (AddGaps ? .2f : 0));
                 float z = row * (CellHeight + (AddGaps ? .2f : 0));
                 MazeCell cell = mMazeGenerator.GetMazeCell(row, column);
-                GameObject tmp;
-                tmp = Instantiate(Floor, new Vector3(x, heightOffset, z), Quaternion.Euler(0, 0, 0)) as GameObject;
+                GameObject tmp = (GameObject)PrefabUtility.InstantiatePrefab(Floor);
+                tmp.transform.position = new Vector3(x, heightOffset, z);
+                tmp.transform.rotation = Quaternion.Euler(0, 0, 0);
                 tmp.transform.parent = transform;
                 if (cell.WallRight)
                 {
-                    tmp = Instantiate(Wall, new Vector3(x + CellWidth / 2, heightOffset, z) + Wall.transform.position, Quaternion.Euler(0, 90, 0)) as GameObject;// right
+                    tmp = (GameObject)PrefabUtility.InstantiatePrefab(Wall);
+                    tmp.transform.position = new Vector3(x + CellWidth / 2, heightOffset, z) + Wall.transform.position;
+                    tmp.transform.rotation = Quaternion.Euler(0, 90, 0);// right
                     tmp.transform.parent = transform;
                 }
                 if (cell.WallFront)
                 {
-                    tmp = Instantiate(Wall, new Vector3(x, heightOffset, z + CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;// front
+                    tmp = (GameObject)PrefabUtility.InstantiatePrefab(Wall);
+                    tmp.transform.position = new Vector3(x, heightOffset, z + CellHeight / 2) + Wall.transform.position;
+                    tmp.transform.rotation = Quaternion.Euler(0, 0, 0);// front
                     tmp.transform.parent = transform;
                 }
                 if (cell.WallLeft)
                 {
-                    tmp = Instantiate(Wall, new Vector3(x - CellWidth / 2, heightOffset, z) + Wall.transform.position, Quaternion.Euler(0, 270, 0)) as GameObject;// left
+                    tmp = (GameObject)PrefabUtility.InstantiatePrefab(Wall);
+                    tmp.transform.position = new Vector3(x - CellWidth / 2, heightOffset, z) + Wall.transform.position;
+                    tmp.transform.rotation = Quaternion.Euler(0, 270, 0);// left
                     tmp.transform.parent = transform;
                 }
                 if (cell.WallBack)
                 {
-                    tmp = Instantiate(Wall, new Vector3(x, heightOffset, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 180, 0)) as GameObject;// back
+                    tmp = (GameObject)PrefabUtility.InstantiatePrefab(Wall);
+                    tmp.transform.position = new Vector3(x, heightOffset, z - CellHeight / 2) + Wall.transform.position;
+                    tmp.transform.rotation = Quaternion.Euler(0, 180, 0);// back
                     tmp.transform.parent = transform;
                 }
                 if (cell.IsGoal && GoalPrefab != null)
                 {
-                    tmp = Instantiate(GoalPrefab, new Vector3(x, heightOffset+1, z), Quaternion.Euler(0, 0, 0)) as GameObject;
+                    tmp = (GameObject)PrefabUtility.InstantiatePrefab(GoalPrefab);
+                    tmp.transform.position = new Vector3(x, heightOffset + 1, z);
+                    tmp.transform.rotation = Quaternion.Euler(0, 0, 0);
                     tmp.transform.parent = transform;
                 }
             }
@@ -104,7 +116,9 @@ public class MazeSpawner : MonoBehaviour
                 {
                     float x = column * (CellWidth + (AddGaps ? .2f : 0));
                     float z = row * (CellHeight + (AddGaps ? .2f : 0));
-                    GameObject tmp = Instantiate(Pillar, new Vector3(x - CellWidth / 2, heightOffset, z - CellHeight / 2), Quaternion.identity) as GameObject;
+                    GameObject tmp = (GameObject)PrefabUtility.InstantiatePrefab(Pillar);
+                    tmp.transform.position = new Vector3(x - CellWidth / 2, heightOffset, z - CellHeight / 2);
+                    tmp.transform.rotation = Quaternion.identity;
                     tmp.transform.parent = transform;
                 }
             }
