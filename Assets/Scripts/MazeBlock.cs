@@ -5,19 +5,27 @@ using VRTK;
 
 public class MazeBlock : MonoBehaviour
 {
+    public GameObject blockToReveal;
+
     private void OnTriggerEnter(Collider col)
     {
         if (MazeLevelManager.Instance.activeBlock == this)
         {
             if (col.gameObject.GetComponent<VRPlayer>())
             {
-                print("Fade in");
+                RevealBlock();
                 //VRTK_ScreenFade.Start(Color.clear, 1f);
             }
         }
     }
 
-    private void OnTriggerExit(Collider col)
+    public void RevealBlock()
+    {
+        print("Reveal block");
+        blockToReveal.SetActive(false);
+    }
+
+    /*private void OnTriggerExit(Collider col)
     {
         if (MazeLevelManager.Instance.activeBlock == this)
         {
@@ -27,5 +35,5 @@ public class MazeBlock : MonoBehaviour
                 //VRTK_ScreenFade.Start(Color.black, 1f);
             }
         }
-    }
+    }*/
 }

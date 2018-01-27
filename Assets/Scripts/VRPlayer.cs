@@ -43,6 +43,7 @@ public class VRPlayer : MonoBehaviour
                 print("Fade initialized");
                 isInitialized = true;
                 MazeLevelManager.Instance.activeBlock = col.gameObject.GetComponent<MazeBlock>();
+                MazeLevelManager.Instance.activeBlock.RevealBlock();
             }
         }
     }

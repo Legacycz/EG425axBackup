@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class Boulder : MonoBehaviour {
     public float speed = 2f;
+    public List<Animator> spriteAnimators = new List<Animator>();
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    private void OnEnable()
+    {
+        for (int i = 0; i < spriteAnimators.Count; ++i)
+        {
+            spriteAnimators[i].enabled = true;
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
         Ray checkRay = new Ray(transform.position, transform.forward);
         Debug.DrawRay(checkRay.origin, checkRay.direction * 1.525f, Color.red);
