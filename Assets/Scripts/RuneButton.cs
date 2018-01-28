@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RuneButton : InteractiveObject {
 
+    public List<int> index;
     internal RunePuzzle puzzleRoot;
 
     private void Start()

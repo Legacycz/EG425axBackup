@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class RunePuzzle : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class RunePuzzle : MonoBehaviour
     public AudioSource thisAudioSource;
     public AudioClip correctSoundFX, wrongSoundFX;
     public int allowedStrikes = 2;
+    public Text monitorText;
 
     internal bool isSolved = false;
     internal List<Sprite> usedSprites = new List<Sprite>();
@@ -47,10 +49,11 @@ public class RunePuzzle : MonoBehaviour
             return;
         }
 
-        if (pressedRuneButton == runes[currentAnswerIndex])
+        if (pressedRuneButton == solution[currentAnswerIndex])
         {
             solutionAnswers[currentAnswerIndex] = true;
             ++currentAnswerIndex;
+            monitorText.text = "--- Lock Interface ---\nPlease enter the sequence to open the door.\n" + currentAnswerIndex + "/ 4";
             if (thisAudioSource)
             {
                 thisAudioSource.PlayOneShot(correctSoundFX);
@@ -81,6 +84,7 @@ public class RunePuzzle : MonoBehaviour
             {
                 solutionAnswers[i] = false;
             }
+            monitorText.text = "--- Lock Interface ---\nPlease enter the sequence to open the door.\n0 / 4";
             currentAnswerIndex = 0;
         }
     }

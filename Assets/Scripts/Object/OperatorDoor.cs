@@ -43,6 +43,7 @@ public class OperatorDoor : UsableBase {
         }
     }
 
+    [ContextMenu("RedrawPassword")]
     public void RedrawPasswordView()
     {
         StartCoroutine(DelayedRedrawPasswordView());
