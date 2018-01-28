@@ -100,8 +100,8 @@ public class VRPlayer : MonoBehaviour
         yield return new WaitForSeconds(3);
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.position = MazeLevelManager.Instance.gameOverPoint.position;
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = Quaternion.identity;
-        //headsetFade.Fade(Color.clear, 2f);
-        //yield return new WaitForSeconds(2);
+        headsetFade.Fade(Color.white, 2f);
+        yield return new WaitForSeconds(2);
         //isDeathBlocked = false;
     }
 
@@ -124,9 +124,9 @@ public class VRPlayer : MonoBehaviour
         yield return new WaitForSeconds(3);
         //VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.position = MazeLevelManager.Instance.gameOverPoint.position;
         //VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = Quaternion.identity;
-        //headsetFade.Fade(Color.clear, 2f);
+        headsetFade.Fade(Color.black, 2f);
         yield return new WaitForSeconds(2);
-        isDeathBlocked = false;
+        //isDeathBlocked = false;
     }
 
     private void OnTriggerEnter(Collider col)
