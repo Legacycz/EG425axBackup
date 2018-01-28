@@ -82,6 +82,11 @@ public class AIBase : MonoBehaviour {
         }
     }
 
+    public void StartPatrol()
+    {
+        ChangeState(AIState.Patrol);
+    }
+
     void PatrolUpdate()
     {
         if (AIManager.Instance.WayPoints == null || CheckpointsIndexs ==  null || CheckpointsIndexs.Length <= 0)
