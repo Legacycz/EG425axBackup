@@ -202,6 +202,7 @@ MonoBehaviour:
   destinationReachedPatrolTreshold: 3
   destinationReachedChaseTreshold: 5
   Shot: {fileID: 1723581968600818, guid: 05d0b1e3f2db6664289bf2f9d92cb4ed, type: 2}
+  CheckpointsIndexs: 
   state: 0
   ForceShoot: 20
 --- !u!135 &135745990344744692

@@ -42,7 +42,7 @@ public class AIBase : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         if (!agent)
             return;
@@ -67,11 +67,11 @@ public class AIBase : MonoBehaviour {
 
     private void AttackUpdate()
     {
-        if(_attackCorutine == null)
+        if (_attackCorutine == null)
         {
-            _attackCorutine= StartCoroutine(AttackCorutine());
+            _attackCorutine = StartCoroutine(AttackCorutine());
         }
-        if(!IsLookingOnTarget())
+        if (!IsLookingOnTarget())
         {
             if (_attackCorutine != null)
             {
@@ -80,11 +80,11 @@ public class AIBase : MonoBehaviour {
                 ChangeState(AIState.Chase);
             }
         }
-    }    
+    }
 
     void PatrolUpdate()
     {
-        if(AIManager.Instance.WayPoints == null)
+        if (AIManager.Instance.WayPoints == null || CheckpointsIndexs ==  null || CheckpointsIndexs.Length <= 0)
         {
             return;
         }
@@ -92,12 +92,12 @@ public class AIBase : MonoBehaviour {
         {
             lastIndexCheckPoint++;
 
-            if (lastIndexCheckPoint >= AIManager.Instance.WayPoints.Length)
+            if (lastIndexCheckPoint >= CheckpointsIndexs.Length)
             {
                 lastIndexCheckPoint = 0;
             }
             if(AIManager.Instance.WayPoints[lastIndexCheckPoint] != null)
-                agent.SetDestination(AIManager.Instance.WayPoints[lastIndexCheckPoint].gameObject.transform.position);
+                agent.SetDestination(GetCheckPoint(lastIndexCheckPoint).gameObject.transform.position);
             
         }
     }
@@ -243,23 +243,24 @@ public class AIBase : MonoBehaviour {
         }
         if (newState == AIState.Patrol)
         {
-            agent.SetDestination(AIManager.Instance.WayPoints[lastIndexCheckPoint].gameObject.transform.position);
+            GameObject checkPoint = GetCheckPoint(lastIndexCheckPoint);
+            if(checkPoint != null)
+            agent.SetDestination(checkPoint.transform.position);
         }
         state = newState; 
     }
 
-    bool GetCheckPoint(out Vector3 point, int index)
+    GameObject GetCheckPoint( int index)
     {
 
         if(AIManager.Instance.WayPoints.Length > 0 && CheckpointsIndexs.Length > 0)
         {
-            if(CheckpointsIndexs.Length > index)
+            if(CheckpointsIndexs.Length > index && AIManager.Instance.WayPoints.Length > CheckpointsIndexs[index])
             {
-               // CheckpointsIndexs[index];
+                return  AIManager.Instance.WayPoints[CheckpointsIndexs[index]];                
             }
         }
-        point = Vector3.zero;
-        return false;
+        return null;
         
     }
 
@@ -269,23 +270,23 @@ public class AIBase : MonoBehaviour {
         {
             Gizmos.DrawLine(transform.position, _target.transform.position);
         }
-        if (AIManager.Instance.WayPoints == null)
+        if (AIManager.Instance == null || AIManager.Instance.WayPoints == null)
         {
             return;
         }
         for (int i = 0; i < AIManager.Instance.WayPoints.Length; i++)
         {
-            if (AIManager.Instance.WayPoints[i] == null)
+            if (GetCheckPoint(i) == null)
                 continue;
             if (i == 0)
             {
-                Gizmos.DrawLine(transform.position, AIManager.Instance.WayPoints[i].transform.position);
+                Gizmos.DrawLine(transform.position, GetCheckPoint(i).transform.position);
             }
             else
             {
-                if (AIManager.Instance.WayPoints[i-1] == null)
+                if (GetCheckPoint(i -1) == null)
                     continue;
-                Gizmos.DrawLine(AIManager.Instance.WayPoints[i - 1].transform.position, AIManager.Instance.WayPoints[i].transform.position);
+                Gizmos.DrawLine(GetCheckPoint(i - 1).transform.position, GetCheckPoint(i).transform.position);
             }
         }
     }
