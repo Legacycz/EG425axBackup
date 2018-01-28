@@ -39,8 +39,9 @@ public class RetroPrinterScriptBasic : MonoBehaviour {
 	
 	#endregion
 
-	void Start () {
-		
+	void OnEnable() {
+        mainText = "";
+
 		Init();
 
 		Run();
@@ -50,8 +51,13 @@ public class RetroPrinterScriptBasic : MonoBehaviour {
 		
 		UpdateProperty();
 	}
-	
-	void Init()
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    void Init()
 	{
 		textCursor = CursorCharacter;
 
