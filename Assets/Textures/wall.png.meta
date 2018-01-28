@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: 60dbc052543f0184dbda8f466a352219
-timeCreated: 1517104909
+timeCreated: 1517109877
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: wall_1
+    21300002: wall_0
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -87,6 +88,20 @@ TextureImporter:
         x: 3344
         y: 0
         width: 3981
+        height: 3979
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: wall_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 3185
         height: 3979
       alignment: 0
       pivot: {x: 0, y: 0}

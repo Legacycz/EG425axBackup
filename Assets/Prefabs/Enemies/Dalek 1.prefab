@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114100620799711402}
   - component: {fileID: 135745990344744692}
   m_Layer: 0
-  m_Name: Dalek
+  m_Name: Dalek 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

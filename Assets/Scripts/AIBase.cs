@@ -140,8 +140,11 @@ public class AIBase : MonoBehaviour {
         Debug.Log("Coll with" + coll.name);
         if( coll.tag == "Player")
         {
-            _target = coll.gameObject;
-            _lookingCorutine = StartCoroutine(LookingForTarget());
+            if (coll.GetComponent<VRPlayer>().enabled)
+            {
+                _target = coll.gameObject;
+                _lookingCorutine = StartCoroutine(LookingForTarget());
+            }
         }
     }
 
