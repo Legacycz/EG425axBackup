@@ -98,9 +98,18 @@ public class Boulder : UsableBase {
 
     public void OnTriggerEnter(Collider other)
     {
-        if(enabled && isActivated && other.GetComponent<VRPlayer>())
+        if(enabled && isActivated)
         {
-            MazeLevelManager.Instance.vrPlayer.Die();
+            if (other.GetComponent<VRPlayer>())
+            {
+                MazeLevelManager.Instance.vrPlayer.Die();
+                return;
+            }
+            AIBase tmp = other.GetComponent<AIBase>();
+            if (tmp)
+            {
+                tmp.Die();
+            }
         }
     }
 }
