@@ -27,6 +27,7 @@ public class UsableBase : MonoBehaviour {
     void OnEnable()
     {
         _parent = transform.parent;
+        transform.parent = null;
     }
 
     
