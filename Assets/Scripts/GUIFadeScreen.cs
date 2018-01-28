@@ -22,6 +22,7 @@ public class GUIFadeScreen : MonoBehaviour {
             elapsedTime += Time.deltaTime / 3;
             yield return null;
         }
+        thisCanvasGroup.alpha = 1;
     }
 
     public void StartUIScreenFadeOut()

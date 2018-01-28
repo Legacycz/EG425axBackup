@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using VRTK;
 
 public class MazeLevelManager : MonoBehaviour {
@@ -10,9 +11,11 @@ public class MazeLevelManager : MonoBehaviour {
     public Transform gameOverPoint;
     public GUIFadeScreen gameOverScreen;
     public GUIFadeScreen winGameScreen;
+    public Image fuelbar;
+    public AudioSource thisAudioSource;
 
     internal VRPlayer vrPlayer;
-
+    
     public Sprite[] abilityIconsAtlas;
 
     public UsableDisplay Usable;
@@ -55,5 +58,25 @@ public class MazeLevelManager : MonoBehaviour {
                 tiles[i].RevealBlock();
             }
         }
+    }
+
+    public void FadeOutMusic()
+    {
+        StopCoroutine(FadeOutMusicSequence());
+        StartCoroutine(FadeOutMusicSequence());
+    }
+
+    private IEnumerator FadeOutMusicSequence()
+    {
+        float elapsedTime = 0;
+        float startVolume = thisAudioSource.volume;
+
+        while (elapsedTime < 1)
+        {
+            thisAudioSource.volume = Mathf.Lerp(1, 0, elapsedTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        thisAudioSource.Stop();
     }
 }

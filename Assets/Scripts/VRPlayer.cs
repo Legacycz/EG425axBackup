@@ -8,9 +8,12 @@ public class VRPlayer : MonoBehaviour
     public GameObject billboardObject;
     public GameObject iconObject;
     public Color playerColor;
+    public float fuel = 100;
 
     private VRTK_HeadsetFade headsetFade;
     private bool isDeathBlocked = false;
+
+    private bool isDead = false;
 
     void Awake()
     {
@@ -51,6 +54,7 @@ public class VRPlayer : MonoBehaviour
         iconObject.transform.localEulerAngles = new Vector3(90, 90, 0);        
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+        RemoveFuel(0);
         MazeLevelManager.Instance.vrPlayer = this;
 
     }
@@ -65,6 +69,17 @@ public class VRPlayer : MonoBehaviour
         if (scr)
         {
             scr.SetReadyToActivate();
+        }
+    }
+
+    public void RemoveFuel(float fuelAmount)
+    {
+        fuel -= fuelAmount;
+        MazeLevelManager.Instance.fuelbar.fillAmount = fuel / 100f;
+
+        if (fuel <= 0)
+        {
+            Die();
         }
     }
 
@@ -93,9 +108,10 @@ public class VRPlayer : MonoBehaviour
     [ContextMenu("Die")]
     public void Die()
     {
-        if (!isDeathBlocked)
+        if (!isDeathBlocked && !isDead)
         {
             headsetFade.Fade(Color.red, 2f);
+            headsetFade.GetComponent<VRTK_HeadsetCollisionFade>().enabled = false;
             StartCoroutine(DieSequence());
         }
     }
@@ -103,10 +119,11 @@ public class VRPlayer : MonoBehaviour
     private IEnumerator DieSequence()
     {
         isDeathBlocked = true;
+        isDead = true;
         MazeLevelManager.Instance.gameOverScreen.StartUIScreenFadeIn();
         yield return new WaitForSeconds(3);
-        VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.position = MazeLevelManager.Instance.gameOverPoint.position;
-        VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = Quaternion.identity;
+        //VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.position = MazeLevelManager.Instance.gameOverPoint.position;
+        //VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = Quaternion.identity;
         //headsetFade.Fade(Color.clear, 2f);
         yield return new WaitForSeconds(2);
         isDeathBlocked = false;

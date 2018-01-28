@@ -14,7 +14,7 @@ public class SelfDestructManager : MonoBehaviour
 
     public Color alertAmbientColor;
 
-    internal float timeLeft = 180;
+    internal float timeLeft = 194;
 
     private bool isInitiated = false;
 
@@ -57,6 +57,9 @@ public class SelfDestructManager : MonoBehaviour
             onSelfDestruct.Invoke();
             isInitiated = true;
             RenderSettings.ambientSkyColor = alertAmbientColor;
+            RenderSettings.fogColor = alertAmbientColor;
+            MazeLevelManager.Instance.FadeOutMusic();
+            GetComponent<AudioSource>().Play();
         }
     }
 }

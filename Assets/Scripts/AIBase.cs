@@ -1,9 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public enum AIState
 {
@@ -13,6 +13,7 @@ public enum AIState
  Attack
 }
 public class AIBase : MonoBehaviour {
+    public UnityEvent OnDie;
 
     public NavMeshAgent agent;
     int lastIndexCheckPoint = 0;
@@ -296,9 +297,10 @@ public class AIBase : MonoBehaviour {
         }
     }
 
+    [ContextMenu("Die")]
     public void Die()
     {
-        Debug.Log("TODO: Some explosion effect for enemy kill.");
+        OnDie.Invoke();
         Destroy(gameObject);
     }
 }
