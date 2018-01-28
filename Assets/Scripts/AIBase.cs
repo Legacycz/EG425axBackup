@@ -20,9 +20,10 @@ public class AIBase : MonoBehaviour {
     public float destinationReachedPatrolTreshold = 3;
     public float destinationReachedChaseTreshold = 8;
     public GameObject Shot;
+    public int[] CheckpointsIndexs;
 
     GameObject _target;
-    public AIState state;
+    public AIState state = AIState.Patrol;
     private Coroutine _lookingCorutine;
     private Coroutine _attackCorutine;
 
@@ -32,9 +33,7 @@ public class AIBase : MonoBehaviour {
     {
         if (!agent)
             return;
-
-        agent.SetDestination(AIManager.Instance.WayPoints[UnityEngine.Random.Range(0, AIManager.Instance.WayPoints.Length)].gameObject.transform.position);
-        state =AIState.Patrol;
+        ChangeState(state);
     }
 
     internal void KillTarger()
@@ -244,6 +243,21 @@ public class AIBase : MonoBehaviour {
             agent.SetDestination(AIManager.Instance.WayPoints[lastIndexCheckPoint].gameObject.transform.position);
         }
         state = newState; 
+    }
+
+    bool GetCheckPoint(out Vector3 point, int index)
+    {
+
+        if(AIManager.Instance.WayPoints.Length > 0 && CheckpointsIndexs.Length > 0)
+        {
+            if(CheckpointsIndexs.Length > index)
+            {
+               // CheckpointsIndexs[index];
+            }
+        }
+        point = Vector3.zero;
+        return false;
+        
     }
 
     void OnDrawGizmosSelected()

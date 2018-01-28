@@ -4,26 +4,20 @@ using UnityEngine;
 
 public class LaserArea : MonoBehaviour {
     public MeshRenderer thisMeshRenderer;
+    public GameObject LasersVisual;
     public Collider thisCollider;
-    public AudioSource thisAudioSource;
 
     public void ToggleLaserArea()
     {
-        thisMeshRenderer.enabled = !thisMeshRenderer.enabled;
-        thisCollider.enabled = thisMeshRenderer.enabled;
-        if (thisMeshRenderer.enabled)
-        {
-            thisAudioSource.Play();
-        }
-        else
-        {
-            thisAudioSource.Stop();
-        }
+        LasersVisual.SetActive(!LasersVisual.activeInHierarchy);
+        thisCollider.enabled = LasersVisual.activeInHierarchy;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         print(other.gameObject.name);
+        if (other.isTrigger)
+            return;
         switch(other.tag)
         {
             case "Player":
