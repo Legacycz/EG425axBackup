@@ -112,6 +112,9 @@ public class VRPlayer : MonoBehaviour
         {
             headsetFade.Fade(Color.red, 2f);
             headsetFade.GetComponent<VRTK_HeadsetCollisionFade>().enabled = false;
+            MazeLevelManager.Instance.layoutImage.raycastTarget = false;
+            VRTK_SDKManager.instance.scriptAliasLeftController.GetComponent<TeleportBlocker>().BlockController();
+            VRTK_SDKManager.instance.scriptAliasRightController.GetComponent<TeleportBlocker>().BlockController();
             StartCoroutine(DieSequence());
         }
     }

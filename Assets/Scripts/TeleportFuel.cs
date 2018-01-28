@@ -25,5 +25,10 @@ public class TeleportFuel : MonoBehaviour {
         {
             MazeLevelManager.Instance.vrPlayer.RemoveFuel(Time.deltaTime * fuelUseMultiplier);
         }
+
+        if(Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            MazeLevelManager.Instance.vrPlayer.RemoveFuel(-requiredTeleportFuel);
+        }
 	}
 }

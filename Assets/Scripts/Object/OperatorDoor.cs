@@ -39,10 +39,21 @@ public class OperatorDoor : UsableBase {
         base.OnMouseDown();
         if (connectedPuzzle)
         {
-            for (int i = 0; i < MazeLevelManager.Instance.runePuzzleSolutionGUI.solutionRunes.Length; ++i)
-            {
-                MazeLevelManager.Instance.runePuzzleSolutionGUI.solutionRunes[i].sprite = connectedPuzzle.solution[i].spriteRenderer.sprite;
-            }
+            RedrawPasswordView();
+        }
+    }
+
+    public void RedrawPasswordView()
+    {
+        StartCoroutine(DelayedRedrawPasswordView());
+    }
+
+    private IEnumerator DelayedRedrawPasswordView()
+    {
+        yield return null;
+        for (int i = 0; i < MazeLevelManager.Instance.runePuzzleSolutionGUI.solutionRunes.Length; ++i)
+        {
+            MazeLevelManager.Instance.runePuzzleSolutionGUI.solutionRunes[i].sprite = connectedPuzzle.solution[i].spriteRenderer.sprite;
         }
     }
 

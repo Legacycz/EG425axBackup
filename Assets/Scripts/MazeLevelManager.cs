@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using VRTK;
 
@@ -13,6 +14,7 @@ public class MazeLevelManager : MonoBehaviour {
     public GUIFadeScreen winGameScreen;
     public Image fuelbar;
     public AudioSource thisAudioSource;
+    public Image layoutImage;
     public RuneSolution runePuzzleSolutionGUI;
 
     internal VRPlayer vrPlayer;
@@ -32,6 +34,11 @@ public class MazeLevelManager : MonoBehaviour {
     {
         VRTK_SDKManager.instance.LoadedSetupChanged += Instance_LoadedSetupChanged;
 	}
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     private void Instance_LoadedSetupChanged(VRTK_SDKManager sender, VRTK_SDKManager.LoadedSetupChangeEventArgs e)
     {

@@ -35,4 +35,11 @@ public class TeleportBlocker : MonoBehaviour {
             }
         }
     }
+
+    public void BlockController()
+    {
+        gameObject.SetActive(false);
+        thisPointer.enabled = false;
+        enabled = false;
+    }
 }
