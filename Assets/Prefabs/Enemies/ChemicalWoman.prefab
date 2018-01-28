@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4227005525156068}
   - component: {fileID: 212230372938619048}
+  - component: {fileID: 114411268127871256}
   m_Layer: 5
   m_Name: Ico
   m_TagString: Untagged
@@ -56,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 1161186021056834}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 7.375, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4706754518112874}
   m_RootOrder: 0
@@ -67,7 +68,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1965935225096194}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 11.56, y: 1.41, z: 36.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -103,6 +104,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2266dc75cf5615c4daf2f418e73df33b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDie:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   agent: {fileID: 195200075275765022}
   Reload: 2
   destinationReachedPatrolTreshold: 3
@@ -111,6 +117,18 @@ MonoBehaviour:
   CheckpointsIndexs: 
   state: 0
   ForceShoot: 20
+--- !u!114 &114411268127871256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1161186021056834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 060958fb2ca99884b950d14d4da539bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetVector: {x: 0, y: 0, z: 0}
 --- !u!135 &135021929447887078
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -234,7 +252,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: 8180ef41a303d414786f3974f3c71ae6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 837c9b38573dab74a9bdfab7463d8d0e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
