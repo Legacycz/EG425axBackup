@@ -69,8 +69,11 @@ public class OperatorDoor : UsableBase {
         Doors.transform.position = endPosition;        
         Open = !Open;
         _opening = false;
-        Buttons[0].Active = !Open;
-        Buttons[1].Active = Open;
+        if (Buttons.Length >= 2)
+        {
+            Buttons[0].Active = !Open;
+            Buttons[1].Active = Open;
+        }
         MazeLevelManager.Instance.Usable.UpdateView();
     }
 }

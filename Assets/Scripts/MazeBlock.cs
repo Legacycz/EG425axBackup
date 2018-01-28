@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using VRTK;
 
 public class MazeBlock : MonoBehaviour
@@ -11,6 +12,7 @@ public class MazeBlock : MonoBehaviour
     public MazeBlock leftBlock;
     public MazeBlock upBlock;
     public MazeBlock downBlock;
+    public UnityEvent OnEnterToBlock;
 
     private void OnEnable()
     {
@@ -68,6 +70,10 @@ public class MazeBlock : MonoBehaviour
             if (col.gameObject.GetComponent<VRPlayer>())
             {
                 RevealBlock();
+                if(OnEnterToBlock != null)
+                {
+                    OnEnterToBlock.Invoke();
+                }
                 //VRTK_ScreenFade.Start(Color.clear, 1f);
             }
         }
