@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114100620799711402}
   - component: {fileID: 135745990344744692}
   m_Layer: 0
-  m_Name: Dalek
+  m_Name: Dalek 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,6 +202,7 @@ MonoBehaviour:
   destinationReachedPatrolTreshold: 3
   destinationReachedChaseTreshold: 5
   Shot: {fileID: 1723581968600818, guid: 05d0b1e3f2db6664289bf2f9d92cb4ed, type: 2}
+  CheckpointsIndexs: 
   state: 0
   ForceShoot: 20
 --- !u!135 &135745990344744692
