@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.2
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -55546,6 +55546,8 @@ MonoBehaviour:
   gameOverPoint: {fileID: 638157498}
   gameOverScreen: {fileID: 0}
   winGameScreen: {fileID: 0}
+  fuelbar: {fileID: 0}
+  thisAudioSource: {fileID: 0}
   abilityIconsAtlas: []
   Usable: {fileID: 1786482125}
 --- !u!4 &1250377202

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+#if UNITY_EDITOR
 using UnityEditor;
 
 //<summary>
@@ -139,3 +140,8 @@ public class MazeSpawner : MonoBehaviour
         }
     }
 }
+#else
+public class MazeSpawner : MonoBehaviour
+{
+}
+#endif
