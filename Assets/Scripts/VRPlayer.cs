@@ -37,6 +37,7 @@ public class VRPlayer : MonoBehaviour
     private void EnablePlayer()
     {
         billboardObject.SetActive(false);
+        GetComponent<AudioSource>().Play();
         headsetFade = (headsetFade != null ? headsetFade : FindObjectOfType<VRTK_HeadsetFade>());
         if (MazeLevelManager.Instance.vrPlayer && MazeLevelManager.Instance.vrPlayer != this)
         {

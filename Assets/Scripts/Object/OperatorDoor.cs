@@ -47,6 +47,7 @@ public class OperatorDoor : UsableBase {
 
     IEnumerator MoveDoor()
     {
+        GetComponent<AudioSource>().Play();
         _opening = true;
         if(!Open)
             doorIcon.sprite = openedSprite;
