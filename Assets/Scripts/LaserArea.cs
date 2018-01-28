@@ -16,14 +16,15 @@ public class LaserArea : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         print(other.gameObject.name);
-        if (other.isTrigger)
-            return;
+
         switch(other.tag)
         {
             case "Player":
                 MazeLevelManager.Instance.vrPlayer.Die();
                 break;
             case "Enemy":
+                if (other.isTrigger)
+                    break;
                 other.GetComponent<AIBase>().Die();
                 break;
         }

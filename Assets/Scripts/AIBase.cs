@@ -82,6 +82,11 @@ public class AIBase : MonoBehaviour {
         }
     }
 
+    public void StartPatrol()
+    {
+        ChangeState(AIState.Patrol);
+    }
+
     void PatrolUpdate()
     {
         if (AIManager.Instance.WayPoints == null || CheckpointsIndexs ==  null || CheckpointsIndexs.Length <= 0)
@@ -140,8 +145,11 @@ public class AIBase : MonoBehaviour {
         Debug.Log("Coll with" + coll.name);
         if( coll.tag == "Player")
         {
-            _target = coll.gameObject;
-            _lookingCorutine = StartCoroutine(LookingForTarget());
+            if (coll.GetComponent<VRPlayer>().enabled)
+            {
+                _target = coll.gameObject;
+                _lookingCorutine = StartCoroutine(LookingForTarget());
+            }
         }
     }
 
