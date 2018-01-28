@@ -22,6 +22,7 @@ public class AIBase : MonoBehaviour {
     public float destinationReachedChaseTreshold = 8;
     public GameObject Shot;
     public int[] CheckpointsIndexs;
+    public float FisrtShootDelay = 3;
 
     GameObject _target;
     public AIState state = AIState.Patrol;
@@ -185,13 +186,15 @@ public class AIBase : MonoBehaviour {
 
     private IEnumerator AttackCorutine()
     {
-        while(_target)
+        yield return new WaitForSeconds(FisrtShootDelay);
+        while (_target)
         {
-            yield return new WaitForSeconds(Reload);
+            
             Vector3 direction = (_target.transform.position - transform.position).normalized;
             GameObject shot = Instantiate(Shot, transform.position + direction * 2, Quaternion.LookRotation(direction));
             Rigidbody shotRig = shot.GetComponent<Rigidbody>();
-            if(shotRig)
+            yield return new WaitForSeconds(Reload);
+            if (shotRig)
             {
                 Shot compShot = shotRig.GetComponent<Shot>();
                 if(compShot)
@@ -204,6 +207,7 @@ public class AIBase : MonoBehaviour {
             {
                 Destroy(shot);
             }
+            
         }
     }
 
