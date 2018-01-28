@@ -31,8 +31,8 @@ public class PlayerIcon : UsableBase {
 
     public void Activete()
     {
-       
-        playerParent.EnablePlayer();
+
+        playerParent.enabled = true;
         MazeLevelManager.Instance.Usable.Selected = null;
     }
 }

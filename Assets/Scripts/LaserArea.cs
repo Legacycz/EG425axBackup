@@ -5,11 +5,20 @@ using UnityEngine;
 public class LaserArea : MonoBehaviour {
     public MeshRenderer thisMeshRenderer;
     public Collider thisCollider;
+    public AudioSource thisAudioSource;
 
     public void ToggleLaserArea()
     {
         thisMeshRenderer.enabled = !thisMeshRenderer.enabled;
         thisCollider.enabled = thisMeshRenderer.enabled;
+        if (thisMeshRenderer.enabled)
+        {
+            thisAudioSource.Play();
+        }
+        else
+        {
+            thisAudioSource.Stop();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
