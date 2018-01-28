@@ -12,11 +12,16 @@ public class RunePuzzle : MonoBehaviour
     public int solutionSize;
     public List<RuneButton> solution = new List<RuneButton>();
     public List<bool> solutionAnswers = new List<bool>();
+    public List<SpriteRenderer> strikeIcons = new List<SpriteRenderer>();
     public AudioSource thisAudioSource;
     public AudioClip correctSoundFX, wrongSoundFX;
+    public int allowedStrikes = 2;
+
+    internal bool isSolved = false;
+    internal List<Sprite> usedSprites = new List<Sprite>();
 
     private int currentAnswerIndex = 0;
-    private bool isSolved = false;
+    private int currentStrikes = 0;
 
     private void Awake()
     {
@@ -61,7 +66,17 @@ public class RunePuzzle : MonoBehaviour
             {
                 thisAudioSource.PlayOneShot(wrongSoundFX);
             }
+
             print("wrong answer");
+            if (currentStrikes > allowedStrikes)
+            {
+                SelfDestructManager.InstantKiller.InitiateSelfDestruct();
+            }
+            else
+            {
+                strikeIcons[currentStrikes].color = Color.red;
+                ++currentStrikes;
+            }
             for (int i = 0; i < solutionSize; ++i)
             {
                 solutionAnswers[i] = false;

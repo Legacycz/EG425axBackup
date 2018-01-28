@@ -13,6 +13,7 @@ public class MazeLevelManager : MonoBehaviour {
     public GUIFadeScreen winGameScreen;
     public Image fuelbar;
     public AudioSource thisAudioSource;
+    public RuneSolution runePuzzleSolutionGUI;
 
     internal VRPlayer vrPlayer;
     

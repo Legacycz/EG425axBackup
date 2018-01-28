@@ -39,6 +39,4 @@ public class UsableBase : MonoBehaviour {
             MazeLevelManager.Instance.Usable.Selected = this;
        }
     }
-
-
 }

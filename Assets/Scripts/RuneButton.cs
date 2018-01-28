@@ -8,9 +8,18 @@ public class RuneButton : InteractiveObject {
 
     private void Start()
     {
-        spriteRenderer.sprite = MazeLevelManager.Instance.abilityIconsAtlas[Random.Range(0, MazeLevelManager.Instance.abilityIconsAtlas.Length)];
+        Sprite newSprite;
+        do
+        {
+            newSprite = MazeLevelManager.Instance.abilityIconsAtlas[Random.Range(0, MazeLevelManager.Instance.abilityIconsAtlas.Length)];
+        }
+        while (puzzleRoot.usedSprites.Contains(newSprite));
+
+        puzzleRoot.usedSprites.Add(newSprite);
+        spriteRenderer.sprite = newSprite;
     }
 
+    [ContextMenu("ForceObjectUsedDerived")]
     public override void ObjectUsed()
     {
         puzzleRoot.CheckAnswer(this);
