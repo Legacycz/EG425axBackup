@@ -20,5 +20,6 @@ public class IngameToggleButton : InteractiveObject {
     {
         OnToggleUsed.Invoke();
         spriteRenderer.flipY = !spriteRenderer.flipY;
+        AudioSource.PlayClipAtPoint((AudioClip)Resources.Load("button_1"), transform.position);
     }
 }

@@ -15,6 +15,7 @@ public class GameStart : MonoBehaviour {
     {
         if(Input.GetMouseButton(0))
         {
+            print("Skip intro");
             StopAllCoroutines();
             Destroy(gameObject);
         }

@@ -34,11 +34,11 @@ public class VRPlayer : MonoBehaviour
         EnablePlayer();
     }
 
-    public void EnablePlayer()
+    private void EnablePlayer()
     {
         billboardObject.SetActive(false);
         headsetFade = (headsetFade != null ? headsetFade : FindObjectOfType<VRTK_HeadsetFade>());
-        if (MazeLevelManager.Instance.vrPlayer)
+        if (MazeLevelManager.Instance.vrPlayer && MazeLevelManager.Instance.vrPlayer != this)
         {
             MazeLevelManager.Instance.vrPlayer.DisablePlayer();
         }
@@ -106,7 +106,7 @@ public class VRPlayer : MonoBehaviour
         yield return new WaitForSeconds(3);
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.position = MazeLevelManager.Instance.gameOverPoint.position;
         VRTK_SDKManager.instance.loadedSetup.actualBoundaries.transform.rotation = Quaternion.identity;
-        headsetFade.Fade(Color.clear, 2f);
+        //headsetFade.Fade(Color.clear, 2f);
         yield return new WaitForSeconds(2);
         isDeathBlocked = false;
     }
