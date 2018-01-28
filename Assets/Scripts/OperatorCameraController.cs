@@ -15,8 +15,10 @@ public class OperatorCameraController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
+        DefaultPosition = Camera.transform.position;
+        ZoomOutMaxSize = Camera.orthographicSize;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
