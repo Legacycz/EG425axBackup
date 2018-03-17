@@ -191,9 +191,10 @@ public class AIBase : MonoBehaviour {
         {
             
             Vector3 direction = (_target.transform.position - transform.position).normalized;
+            yield return new WaitForSeconds(Reload);
             GameObject shot = Instantiate(Shot, transform.position + direction * 2, Quaternion.LookRotation(direction));
             Rigidbody shotRig = shot.GetComponent<Rigidbody>();
-            yield return new WaitForSeconds(Reload);
+            
             if (shotRig)
             {
                 Shot compShot = shotRig.GetComponent<Shot>();

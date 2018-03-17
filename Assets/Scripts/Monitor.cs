@@ -23,8 +23,11 @@ public class Monitor : MonoBehaviour {
 
     private void InstantKiller_onSelfDestruct()
     {
-        StopAllCoroutines(); 
-        slides[currentSlide].SetActive(false);
+        StopAllCoroutines();
+        if (slides.Count > 0)
+        {
+            slides[currentSlide].SetActive(false);
+        }
         countdownSlide.SetActive(true);
         Color newColor = SelfDestructManager.InstantKiller.alertAmbientColor;
         overlayImage.GetComponent<Image>().color = newColor;

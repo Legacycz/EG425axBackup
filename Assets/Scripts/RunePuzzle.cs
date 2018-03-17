@@ -74,6 +74,7 @@ public class RunePuzzle : MonoBehaviour
             if (currentStrikes > allowedStrikes)
             {
                 SelfDestructManager.InstantKiller.InitiateSelfDestruct();
+                ResolvePuzzle();
             }
             else
             {

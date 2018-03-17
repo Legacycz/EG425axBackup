@@ -362,7 +362,7 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
   playerParent: {fileID: 114608790161127410}
-  destcriptionEmpty: Use it
+  destcriptionEmpty: Activate this body
   destcriptioFull: Your freinds
 --- !u!114 &114608790161127410
 MonoBehaviour:
@@ -378,6 +378,7 @@ MonoBehaviour:
   billboardObject: {fileID: 1971305268180782}
   iconObject: {fileID: 1671698194039682}
   playerColor: {r: 0.15862082, g: 1, b: 0, a: 1}
+  fuel: 100
 --- !u!114 &114672638967379128
 MonoBehaviour:
   m_ObjectHideFlags: 1

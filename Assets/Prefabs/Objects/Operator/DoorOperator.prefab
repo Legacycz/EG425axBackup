@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 65996516558647860}
   - component: {fileID: 23964450521233678}
   - component: {fileID: 114248303089482300}
+  - component: {fileID: 208519096536269862}
   m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
@@ -515,6 +516,22 @@ MonoBehaviour:
   doorIcon: {fileID: 212574388123251714}
   openedSprite: {fileID: 21300018, guid: e66a98ef442f460408ba9a782b7a83e3, type: 3}
   closedSprite: {fileID: 21300014, guid: e66a98ef442f460408ba9a782b7a83e3, type: 3}
+  connectedPuzzle: {fileID: 0}
+--- !u!208 &208519096536269862
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1149926363454814}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!208 &208736618183456902
 NavMeshObstacle:
   m_ObjectHideFlags: 1

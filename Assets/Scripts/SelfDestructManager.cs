@@ -14,6 +14,9 @@ public class SelfDestructManager : MonoBehaviour
 
     public Color alertAmbientColor;
 
+    public GameObject uiCanvas, operatorCamera;
+
+
     internal float timeLeft = 194;
 
     private bool isInitiated = false;
@@ -34,6 +37,12 @@ public class SelfDestructManager : MonoBehaviour
                 enabled = false;
             }
             timeLeft = Mathf.Clamp(timeLeft - Time.deltaTime, 0, float.MaxValue);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Keypad0))
+        {
+            uiCanvas.SetActive(!uiCanvas.activeSelf);
+            operatorCamera.SetActive(uiCanvas.activeSelf);
         }
     }
 
